@@ -8,3 +8,15 @@
     color:pink;
     font-family: monospace;
 }
+
+#studyTimer {
+  color: pink;
+  font-family: monospace;
+  font-weight: bold
+}
+
+#breakTimer {
+  color: pink;
+  font-family: monospace;
+  font-weight: bold
+}
