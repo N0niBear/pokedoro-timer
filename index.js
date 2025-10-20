@@ -19,9 +19,10 @@ function updateDateTime() {
 updateDateTime();
 setInterval(updateDateTime, 1000);
 
+
 //POMODORO TIMER
 let studyCountdown;
-let studyTimeLeft = 25 * 60;
+let studyTimeLeft = 60;
 let isStudyPaused = false;
 
 function updateStudyTimer() {
@@ -48,8 +49,8 @@ function startStudyTimer() {
 
       if (studyTimeLeft <= 0) {
         clearInterval(studyCountdown);
-        countdown = null;
-        startBreakTimer();
+        studyCountdown = null;
+        showPokemonPopup();
       }
     }
   }, 1000);
@@ -65,10 +66,11 @@ function resetStudyTimer() {
   clearInterval(studyCountdown);
   studyCountdown = null;
   isStudyPaused = false;
-  studyTimeLeft = 25 * 60;
+  studyTimeLeft = 60;
   document.getElementById("pauseButton").textContent = "Pause";
   updateStudyTimer();
 }
+
 
 //BREAK TIMER
 let breakCountdown;
@@ -143,3 +145,52 @@ document.getElementById("resetBreak").addEventListener("click", resetBreakTimer)
 
 updateStudyTimer();
 updateBreakTimer();
+
+//POKEMON CATCHER
+//RANDOM POKEMON
+async function getRandomPokemon() {
+  const randomId = Math.floor(Math.random() * 1025) + 1;
+  const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${randomId}`);
+  const data = await response.json();
+  return data;
+}
+
+//POPUP
+let currentPokemon = null;
+
+async function showPokemonPopup() {
+  const pokemon = await getRandomPokemon();
+  document.getElementById("pokemonName").textContent =
+    `A wild ${pokemon.name.toUpperCase()} appeared!`;
+  document.getElementById("pokemonSprite").src = pokemon.sprites.front_default;
+  document.getElementById("pokemonPopup").style.display = "block";
+
+  currentPokemon = {
+    id: pokemon.id,
+    name: pokemon.name,
+    sprite: pokemon.sprites.front_default
+  };
+}
+
+//CATCH BUTTON
+document.getElementById("catchButton").addEventListener("click", () => {
+  if (!currentPokemon) return;
+
+  let pokedex = JSON.parse(localStorage.getItem("pokedex")) || [];
+  const alreadyCaught = pokedex.some(p => p.id === currentPokemon.id);
+
+  if (!alreadyCaught) {
+    pokedex.push(currentPokemon);
+    localStorage.setItem("pokedex", JSON.stringify(pokedex));
+    alert(`${currentPokemon.name.toUpperCase()} was caught!`);
+  } else {
+    alert(`You already have ${currentPokemon.name.toUpperCase()}!`);
+  }
+
+  document.getElementById("pokemonPopup").style.display = "none";
+});
+
+//RELEASE BUTTON
+document.getElementById("releaseButton").addEventListener("click", () => {
+  document.getElementById("pokemonPopup").style.display = "none";
+});

@@ -8,12 +8,20 @@
 
 <body>
 
+    <h1>Instructions for testing:</h1>
+    <ol>
+        <li>Click Start</li>
+        <li>Wait for the minute</li>
+        <li>Let the Pokemon go or catch it</li>
+        <li>RESET the timer! (or else it breaks and just keeps catching for some reason I'll figure out later)</li>
+    </ol>
+
     <!--Date & Time -->
     <div id = "date"></div>
     <div id = "time"></div>
 
     <!--Pomodoro Timer-->
-    <div id="studyTimer">25:00</div>
+    <div id="studyTimer">01:00</div>
     <button id="startButton">Start</button>
     <button id="pauseButton">Pause</button>
     <button id="resetButton">Reset</button>
@@ -23,6 +31,14 @@
     <button id="startBreak">Start</button>
     <button id="pauseBreak">Pause</button>
     <button id="resetBreak">Reset</button>
+
+    <!--Pokemon-->
+    <div id = "pokemonPopup" style = "display:none;" class = "popup">
+        <h2 id = "pokemonName"></h2>
+        <img id = "pokemonSprite" src = "" alt = "Image of Pokemon">
+        <button id = "catchButton">Catch</button>
+        <button id = "releaseButton">Let It Go</button>
+    </div>
 
 </body>
 
