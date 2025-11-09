@@ -160,37 +160,90 @@ let currentPokemon = null;
 
 async function showPokemonPopup() {
   const pokemon = await getRandomPokemon();
-  document.getElementById("pokemonName").textContent =
-    `A wild ${pokemon.name.toUpperCase()} appeared!`;
-  document.getElementById("pokemonSprite").src = pokemon.sprites.front_default;
+  const shiny = rollShiny();
+  const spriteUrl = pickSprite(pokemon, shiny);
+  const title = shiny 
+  ? `A SHINY ${pokemon.name.toUpperCase()} appeared!`
+  : `A wild ${pokemon.name.toUpperCase()} appeared!`;
+
+  document.getElementById("pokemonName").textContent = title;
+  document.getElementById("pokemonSprite").src = spriteUrl;
   document.getElementById("pokemonPopup").style.display = "block";
 
   currentPokemon = {
     id: pokemon.id,
     name: pokemon.name,
-    sprite: pokemon.sprites.front_default
+    sprite: spriteUrl,
+    shiny: shiny
   };
+}
+
+//SHINY POKEMON CHANCE
+const shiny_odds = 4096; //want to lower this near end for more chances
+
+//for testing the shiny rolls - set to null when not testing
+const shiny_test_odds = 1; 
+
+function rollShiny() {
+  const odds = shiny_test_odds ?? shiny_odds;
+  return Math.floor(Math.random() * odds) === 0;
+}
+
+function pickSprite(pokemon, isShiny) {
+  const s = pokemon.sprites;
+  const candidates = isShiny
+    ? [
+        s.front_shiny,
+        s.other?.home?.front_shiny,
+        s.other?.["official-artwork"]?.front_shiny,
+        s.other?.dream_world?.front_default,
+        s.front_default
+      ]
+    : [
+        s.front_default,
+        s.other?.home?.front_default,
+        s.other?.["official-artwork"]?.front_default,
+        s.other?.dream_world?.front_default
+      ];
+  return candidates.find(Boolean) || "";
 }
 
 //CATCH BUTTON
 document.getElementById("catchButton").addEventListener("click", () => {
   if (!currentPokemon) return;
 
-  let pokedex = JSON.parse(localStorage.getItem("pokedex")) || [];
-  const alreadyCaught = pokedex.some(p => p.id === currentPokemon.id);
+  const pokedex = getPokedex();
+
+  const alreadyCaught = pokedex.some(
+    p => p.id === currentPokemon.id && p.shiny === currentPokemon.shiny
+  );
 
   if (!alreadyCaught) {
     pokedex.push(currentPokemon);
-    localStorage.setItem("pokedex", JSON.stringify(pokedex));
-    alert(`${currentPokemon.name.toUpperCase()} was caught!`);
+    setPokedex(pokedex);
+    const label = currentPokemon.shiny
+      ? `SHINY ${currentPokemon.name.toUpperCase()}`
+      : currentPokemon.name.toUpperCase();
+    alert(`${label} was caught!`);
   } else {
-    alert(`You already have ${currentPokemon.name.toUpperCase()}!`);
+    const label = currentPokemon.shiny
+      ? `SHINY ${currentPokemon.name.toUpperCase()}`
+      : currentPokemon.name.toUpperCase();
+    alert(`You already have ${label}!`);
   }
 
   document.getElementById("pokemonPopup").style.display = "none";
+  currentPokemon = null;
 });
 
 //RELEASE BUTTON
 document.getElementById("releaseButton").addEventListener("click", () => {
   document.getElementById("pokemonPopup").style.display = "none";
 });
+
+function getPokedex() {
+  return JSON.parse(localStorage.getItem("pokedex") || "[]");
+}
+function setPokedex(arr) {
+  localStorage.setItem("pokedex", JSON.stringify(arr));
+}
