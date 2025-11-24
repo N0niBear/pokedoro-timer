@@ -8,24 +8,38 @@
 
 <body>
 
-    <!--Date & Time -->
-    <div id = "date"></div>
-    <div id = "time"></div>
-
-    <!--Pomodoro Timer-->
-    <div id="studyTimer">01:00</div>
-    <button id="startButton">Start</button>
-    <button id="pauseButton">Pause</button>
-    <button id="resetButton">Reset</button>
-
-    <!--Break Timer-->
-    <div id="breakTimer">05:00</div>
-    <button id="startBreak">Start</button>
-    <button id="pauseBreak">Pause</button>
-    <button id="resetBreak">Reset</button>
-
     <!--Pokedex-->
     <a href="pokedex.html">Pokédex</a>
+    
+<div class = "homeContainer">
+
+    <!--Date & Time -->
+    <div class = "dateCard">
+        <div id = "date"></div>
+        <div id = "time"></div>
+    </div>
+
+    <!--Pomodoro Timer-->
+    <div class = "timerCard">
+        <div id ="studyTimer">01:00</div>
+        <div class = "buttonRow">
+        <button id ="startButton">Start</button>
+        <button id ="pauseButton">Pause</button>
+        <button id ="resetButton">Reset</button>
+        </div>
+    </div>
+
+    <!--Break Timer-->
+    <div class = "timerCard">
+        <div id ="breakTimer">05:00</div>
+        <div class = "buttonRow">
+        <button id ="startBreak">Start</button>
+        <button id ="pauseBreak">Pause</button>
+        <button id ="resetBreak">Reset</button>
+        </div>
+    </div>
+
+</div>
 
     <!--Pokemon-->
     <div id = "pokemonPopup" style = "display:none;" class = "popup">

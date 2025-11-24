@@ -1,0 +1,125 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: lavender;
+}
+
+.homeContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    place-content: center;
+    gap: 1rem;
+    margin: 0 auto;
+}
+
+/* Date & Time */
+.dateCard {
+    background-color: cornflowerblue;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+#date {
+    text-align: center;
+}
+
+#time {
+
+}
+
+/* Cards */
+.timerCard {
+    background-color: cornflowerblue;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.buttonRow {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+/* Study Timer */
+#studyTimer {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+/* Break Timer */
+#breakTimer { 
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+/* To-Do List */
+#listHeader {
+    
+ }
+
+#listInput { 
+
+}
+
+#toDoList {
+
+ }
+
+.addBtn {
+
+ }
+
+.todo-checkbox { 
+
+}
+
+.todo-text { 
+
+}
+
+.close { 
+
+}
+
+.header { 
+
+}
+
+/* Pokemon Popup */
+#pokemonPopup { 
+
+}
+
+#pokemonName { 
+
+}
+
+#pokemonSprite { 
+
+}
+
+#catchButton {
+
+ }
+
+#releaseButton {
+
+ }
+
+/* Popup */
+.popup { 
+
+}

@@ -25,7 +25,6 @@ function updateDateTime() {
 updateDateTime();
 setInterval(updateDateTime, 1000);
 
-
 //POMODORO TIMER
 let studyCountdown;
 let studyTimeLeft = 60;
