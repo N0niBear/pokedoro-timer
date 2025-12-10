@@ -7,11 +7,21 @@ function setPokedex(arr) {
   localStorage.setItem("pokedex", JSON.stringify(arr));
 }
 
+//FILTER 
+let currentTypeFilter = "";
+
 //MAKING THE POKEDEX
 function renderPokedex() {
-  const pokedex = getPokedex();
+  let pokedex = getPokedex();
   const list = document.getElementById("pokedexList");
+
   list.innerHTML = "";
+
+  if (currentTypeFilter) {
+    pokedex = pokedex.filter(p => 
+      Array.isArray(p.types) && p.types.includes(currentTypeFilter)
+    );
+  }
 
   if (pokedex.length === 0) {
     list.textContent = "No Pokémon caught yet!";
@@ -49,4 +59,12 @@ document.getElementById("clearPokedex").addEventListener("click", () => {
   renderPokedex();
 });
 
+//FILTERING TYPES
+document.getElementById("typeFilter").addEventListener("change", (e) => {
+  currentTypeFilter = e.target.value;  
+  renderPokedex();                      
+});
+
 renderPokedex();
+
+
