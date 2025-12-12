@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>To Do List</title>
+  <link rel = "stylesheet" href = "styles.css">
+</head>
+
+<body>
+
+<div class = "titleName">
+    <div id = "titleWord">Pokédoro</div>
+    <h1>Timer</h1>
+</div>
+
+<div class = "navBar">
+<ul>
+    <li><a href="index.html">Home</a></li>
+    <!--Pokedex-->
+    <li><a href="pokedex.html">Pokédex</a></li>
+    <!--To Do List-->
+    <li><a class = "active" href="todolist.html">To Do List</a></li>
+</ul>
+</div>
+
+<div id="listHeader" class = "header">
+    <h2>To-Do</h2>
+    <input type = "text" id = "listInput" placeholder = "What to do...">
+    <button onclick = "newElement()" class = "addBtn">Add</button>
+</div> 
+<ul id = "toDoList">
+</ul>
+
+</body>
+
+<script src = "todolist.js"></script>
+
+</html>

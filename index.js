@@ -29,6 +29,7 @@ setInterval(updateDateTime, 1000);
 let studyCountdown;
 let studyTimeLeft = 60;
 let isStudyPaused = false;
+let onBreak = false;
 
 function updateStudyTimer() {
     let minutes = Math.floor(studyTimeLeft / 60);
@@ -43,6 +44,7 @@ function updateStudyTimer() {
     
     document.getElementById("studyTimer").textContent = formattedTime;
 }
+
 //START BUTTON
 function startStudyTimer() {
   if (studyCountdown || onBreak) return;
@@ -75,13 +77,10 @@ function resetStudyTimer() {
   document.getElementById("pauseButton").textContent = "Pause";
   updateStudyTimer();
 }
-
-
 //BREAK TIMER
 let breakCountdown;
 let breakTimeLeft = 5 * 60;
 let isBreakPaused = false;
-let onBreak = false;
 
 function updateBreakTimer() {
   let minutes = Math.floor(breakTimeLeft / 60);
@@ -101,7 +100,7 @@ function startBreakTimer() {
   if (breakCountdown) return;
   onBreak = true;
   isBreakPaused = false;
-  alert("You made it 25 minutes! Take your 5 minute break!")
+  showMessage("Great job! Break time started!", "rgba(54, 162, 235, 0.8)");
 
   breakCountdown = setInterval(() => {
     if (!isBreakPaused) {
@@ -111,7 +110,7 @@ function startBreakTimer() {
       if (breakTimeLeft <= 0) {
         clearInterval(breakCountdown);
         breakCountdown = null;
-        alert("Break's over! Get ready for another poke-venture!");
+        showMessage("Break’s over! Ready for another Poké-venture?", "rgba(255, 206, 86, 0.9)");
         resetAllTimers();
       }
     }
@@ -220,7 +219,7 @@ function pickSprite(pokemon, isShiny) {
 document.getElementById("catchButton").addEventListener("click", () => {
   if (!currentPokemon) return;
 
-  const pokedex = getPokedex();
+  let pokedex = JSON.parse(localStorage.getItem("pokedex")) || []; //let instead of const
 
   const alreadyCaught = pokedex.some(
     p => p.id === currentPokemon.id && p.shiny === currentPokemon.shiny
@@ -228,25 +227,28 @@ document.getElementById("catchButton").addEventListener("click", () => {
 
   if (!alreadyCaught) {
     pokedex.push(currentPokemon);
-    setPokedex(pokedex);
+    localStorage.setItem("pokedex", JSON.stringify(pokedex));
     const label = currentPokemon.shiny
       ? `SHINY ${currentPokemon.name.toUpperCase()}`
       : currentPokemon.name.toUpperCase();
-    alert(`${label} was caught!`);
+    showMessage(`${label} was caught!`, "rgba(255, 206, 86, 0.8)");
   } else {
     const label = currentPokemon.shiny
       ? `SHINY ${currentPokemon.name.toUpperCase()}`
       : currentPokemon.name.toUpperCase();
-    alert(`You already have ${label}!`);
+    showMessage(`You already have ${label}!`, "rgba(153, 102, 255, 0.8)");
   }
 
   document.getElementById("pokemonPopup").style.display = "none";
   currentPokemon = null;
+  startBreakTimer(); //automatically start break timer on catch
 });
 
 //RELEASE BUTTON
 document.getElementById("releaseButton").addEventListener("click", () => {
   document.getElementById("pokemonPopup").style.display = "none";
+  currentPokemon = null;
+  startBreakTimer();
 });
 
 function getPokedex() {
@@ -256,104 +258,15 @@ function setPokedex(arr) {
   localStorage.setItem("pokedex", JSON.stringify(arr));
 }
 
-//TO DO LIST
-//defining a key name for local storage
-const STORAGE_KEY = "toDoList"; 
-//retrieving from local storage
-function getToDos() {
-  try {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; //gets it from the key, and nothing stored then [] returns empty array
-  } catch {
-    return [];
-  }
+//MESSAGES INSTEAD OF ALERT
+function showMessage(msg, color = "rgba(255, 99, 132, 0.7)") {
+  const box = document.getElementById("messageBox");
+  box.textContent = msg;
+  box.style.background = color;
+  box.classList.add("show");
+
+  // Auto-hide message after 5 seconds
+  setTimeout(() => {
+    box.classList.remove("show");
+  }, 5000);
 }
-//saving to storage
-function setToDos(arr) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(arr)); //turns into text for storage
-}
-//render the list
-function render() {
-  const listEl = document.getElementById("toDoList"); //grabs element from HTML
-  const todos = getToDos(); //retrieving from storage
-
-  listEl.innerHTML = ""; //clears
-
-  todos.forEach((item, idx) => { //looping over each item
-    const li = document.createElement("li"); //creating a new LI
-    li.dataset.index = idx; //saves the position where it's at for deleting/checking later
-
-    const checkbox = document.createElement("input"); //creating a checkbox for each new LI
-    checkbox.type = "checkbox";
-    checkbox.checked = item.checked; 
-    checkbox.className = "todo-checkbox";
-    li.appendChild(checkbox);
-
-    //add the text
-    const textSpan = document.createElement("span");
-    textSpan.className = "todo-text";
-    textSpan.textContent = item.text;
-    li.appendChild(textSpan);
-
-    const close = document.createElement("span");
-    close.className = "close";
-    close.textContent = "\u00D7"; //weird unicode for multiplication symbol for close button
-    li.appendChild(close);
-
-    listEl.appendChild(li);
-  });
-}
-
-//ADDING NEW LI
-function newElement() {
-  const input = document.getElementById("listInput");
-  const text = input.value.trim();
-
-  if (!text) {
-    alert("You have to type something!");
-    return;
-  }
-
-  const todos = getToDos();
-  todos.push({ text, checked: false });
-  setToDos(todos);
-  input.value = "";
-  render();
-}
-
-//EVENT DELEGATING
-document.getElementById("toDoList").addEventListener("click", function (ev) {
-  const target = ev.target;
-
-  if (target.classList.contains("close")) {
-    const li = target.closest("li");
-    const idx = Number(li.dataset.index);
-    const todos = getToDos();
-    todos.splice(idx, 1);
-    setToDos(todos);
-    render();
-    return;
-  } 
-});
-
-//checkbox changes
-document.getElementById("toDoList").addEventListener("change", function (ev) {
-  const target = ev.target;
-
-  if (target.classList.contains("todo-checkbox")) {
-    const li = target.closest("li");
-    const idx = Number(li.dataset.index);
-    const todos = getToDos();
-    todos[idx].checked = target.checked;
-    setToDos(todos);
-  }
-});
-
-
-//USE ENTER KEY TO ADD - accessibility
-document.getElementById("listInput").addEventListener("keydown", function (e) {
-  if (e.key === "Enter") {
-    newElement();
-  }
-});
-
-document.addEventListener("DOMContentLoaded", render);

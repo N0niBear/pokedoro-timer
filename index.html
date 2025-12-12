@@ -1,24 +1,39 @@
 <!DOCTYPE html>
+<html lang="en">
+
 <head>
-    <meta charset = "UTF-8">
-    <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
-    <title>Pokedoro Timer</title>
-    <link rel = "stylesheet" href = "styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pokédoro Timer</title>
+  <link rel = "stylesheet" href = "styles.css">
 </head>
 
 <body>
 
-    <!--Pokedex-->
-    <a href="pokedex.html">Pokédex</a>
-    
-<div class = "homeContainer">
+<div class = "titleName">
+    <div id = "titleWord">Pokédoro</div>
+    <h1>Timer</h1>
+</div>
+
+<div class = "navBar">
+    <ul>
+        <li><a class = "active" href="index.html">Home</a></li>
+        <!--Pokedex-->
+        <li><a href="pokedex.html">Pokédex</a></li>
+        <!--To Do List-->
+        <li><a href="todolist.html">To Do List</a></li>
+    </ul>
+</div>
 
     <!--Date & Time -->
     <div class = "dateCard">
         <div id = "date"></div>
         <div id = "time"></div>
-    </div>
+    </div>   
 
+    <div id="messageBox" class="message-box"></div>
+
+<div class = "homeContainer">
     <!--Pomodoro Timer-->
     <div class = "timerCard">
         <div id ="studyTimer">01:00</div>
@@ -38,7 +53,6 @@
         <button id ="resetBreak">Reset</button>
         </div>
     </div>
-
 </div>
 
     <!--Pokemon-->
@@ -48,15 +62,6 @@
         <button id = "catchButton">Catch</button>
         <button id = "releaseButton">Let It Go</button>
     </div>
-
-    <!--To Do List-->
-    <div id="listHeader" class = "header">
-        <h2>To-Do</h2>
-        <input type = "text" id = "listInput" placeholder = "What to do...">
-        <button onclick = "newElement()" class = "addBtn">Add</button>
-    </div> 
-    <ul id = "toDoList">
-    </ul>
 
 </body>
 
