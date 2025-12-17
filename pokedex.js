@@ -34,11 +34,12 @@ function renderPokedex() {
     const card = document.createElement("div");
     card.className = "pokemon-card";
     card.innerHTML = `
-      <img src="${p.sprite}" alt="${p.name}">
-      <p>${p.shiny ? "✨ " : ""}${p.name}</p>
-      <button class="release-btn" data-id="${p.id}" data-shiny="${p.shiny}">Release</button>`;
+    <button class="release-btn" data-id="${p.id}" data-shiny="${p.shiny}">x</button>  
+    <img src="${p.sprite}" alt="${p.name}">
+      <p>${p.shiny ? "✨ " : ""}${p.name}</p>`;
     list.appendChild(card);
   });
+  
 
    if (countEl) countEl.textContent = pokedex.length;
 }
