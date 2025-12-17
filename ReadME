@@ -1,0 +1,50 @@
+Pokédoro Timer
+
+A Pokémon-themed Pomodoro productivity app that combines focused productivity sessions with fun, game-like rewards.
+Users complete timed work sessions to encounter and catch Pokémon, track their collection in a Pokédex, and manage 
+tasks with a built-in to-do list.
+
+Features
+
+Pomodoro & Break Timer
+- Study and break timers, with start, pause, resume and reset functionality
+- Automatic break session after completing a study timer
+- Real-time countdown updates
+
+Pokemon Encounter (API Integration)
+- Random Pokémon encounters provided by the PokeAPI
+- Shiny Pokémon chance system
+- Catch or release Pokémon at the end of each study session
+
+Pokédex
+- Stores caught Pokémon using localStorage
+- Displays Pokémon sprites, names, and shiny status
+- Filter Pokémon by type
+- Remove individual Pokémon or clear the entire Pokédex
+
+To-Do List
+- Add, check off, and remove tasks
+- Persistent storage using localStorage
+- Keyboard accessibility (Enter key support)
+
+Live Date & Time
+- Displays the current date and time
+- Automatically updates every second
+
+
+Technologies Used
+- HTML5 – Semantic page structure
+- CSS3 – Flexbox, Grid, custom fonts, responsive layout
+- JavaScript (ES6+) – Application logic, timers, DOM manipulation
+- PokéAPI – External API for Pokémon data
+- Local Storage API – Persistent user data storage
+
+
+Responsive Design
+- Uses CSS Grid and Flexbox for layout
+- Responsive adjustments for desktop and mobile screens via media queries
+- Optimized for usability across different screen sizes
+
+Author
+Noni Bryar
+Front-End Web Developer & UX/UI Designer  

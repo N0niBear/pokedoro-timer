@@ -2,18 +2,16 @@
     font-family: 'Pokemon Solid';
     src: url('fonts/Pokemon\ Solid.ttf');
 }
-
 body {
     font-family:'Courier New', Courier, monospace;
+    background-color: #EAEBED;
 }
-
 .titleName {
     display: flex;
     align-items:center;
     justify-content: center;
     gap: 0.5rem;
 }
-
 #titleWord {
     font-family: 'Pokemon Solid';
     font-size: 2.5rem;
@@ -22,7 +20,6 @@ body {
     -webkit-text-stroke-color: #1C57C4;
     text-shadow: 4px 4px #333;
 }
-
 #titleWord2 {
     font-family: 'Pokemon Solid';
     font-size: 1.5rem;
@@ -57,7 +54,6 @@ body {
     background-color: #D7E6FF;
     border-right: 2px solid #FFF4C2
 }
-
 .homeLayout{
     display: flex;
     flex-direction: column;
@@ -66,94 +62,153 @@ body {
     align-items: stretch;
 }
 
-/* Date & Time */
+/* Date & Timers */
 .dateCard {
     width: 100%;
     max-width: 420px;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
     /*background-color: #D7E6FF;
     padding: 1rem;
     border-radius: 12px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;*/
+    */
 }
-
-/* Cards */
 .timerCard {
     width: 100%;
     max-width: 420px;
     margin: 0 auto;
-    background-color: #D7E6FF;
-    padding: 1rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    font-size: 3rem;
+    font-weight: bold;
+    /*background-color: #D7E6FF;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);*/
 }
-
 .buttonRow {
-    flex-wrap: wrap;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.buttonRow button {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
 }
 
 /* To-Do List */
-#listHeader {
-    
+#listHeader.header {
+    background: #1C57C4;
+    color: #EAEBED;
+    padding: 1rem;
+    margin: 16px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
 }
-
-#listInput { 
-
+#listHeader h2 {
+    margin: 0;
+    text-align: center;
 }
-
-#toDoList {
-
+#listInput {
+    padding: 0.75rem 1rem;
+    border: 4px solid #D7E6FF;
+    outline: none;
+    font-size: 1rem;
+    font-family: 'Courier New', Courier, monospace;
 }
-
+#listInput:focus {
+    border-color: #FFCE0A;
+}
 .addBtn {
-
+    display: block;
+    margin: auto;
+    padding: 0.5rem 1rem;
+    background: #CBF6DC;
+    border: 4px solid #FFF4C2;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-family:'Courier New', Courier, monospace;
+}
+.addBtn:hover {
+  background: #F3CDE2;
+}
+#toDoList {
+  list-style: none;
+  padding: 0;
+  margin: 16px;
+  display: grid;
+  gap: .5rem;
+}
+#toDoList li {
+    padding: 0.75rem 1rem;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 0.5rem;
+}
+.todo-checkbox {
+    width: 18px;
+    height: 18px;
+    accent-color: #CC0000;
+    cursor: pointer;
+}
+.todo-text {
+    font-size: 1rem;
+    color: #0D0C1D;
+}
+.todo-checkbox:checked + .todo-text {
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+.close {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 1.25rem;
+  line-height: 1;
+  padding: 0.25rem 0.5rem;
+  border-radius: 10px;
 }
 
-.todo-checkbox { 
-
+.close:hover {
+  background: rgba(204, 0, 0, 0.25);
 }
 
-.todo-text { 
-
-}
-
-.close { 
-
-}
-
-.header { 
-
+/* If you add a "completed" class to the li in JS */
+#toDoList li.completed .todo-text {
+  text-decoration: line-through;
+  opacity: 0.6;
 }
 
 /* Pokemon Popup */
 #pokemonPopup { 
 
 }
-
 #pokemonName { 
 
 }
-
 #pokemonSprite { 
 
 }
-
 #catchButton {
 
 }
-
 #releaseButton {
 
 }
+
 
 .message-box {
    margin-top: 1rem;
@@ -166,7 +221,6 @@ body {
     border-radius: 10px;
     display: none;
 }
-
 .message-box.show {
     display: block;
 }
@@ -211,10 +265,13 @@ body {
 .release-btn {
     float: inline-end;
     font-family: 'Courier New', Courier, monospace;
-    background: #CBF6DC;
-    border-radius: 8px;
-    border: 2px solid #FFF4C2;
+    border: none;
+    background: transparent;
     cursor: pointer;
+    font-size: 1.25rem;
+    line-height: 1;
+    padding: 0.25rem 0.5rem;
+    border-radius: 10px;
 }
 .release-btn:hover {
     background: #F3CDE2;
@@ -224,7 +281,7 @@ body {
     margin: 2rem auto;
     padding: 0.5rem 1rem;
     background: #CBF6DC;
-    border: 5px solid #FFF4C2;
+    border: 4px solid #FFF4C2;
     border-radius: 8px;
     cursor: pointer;
     font-size: 1rem;
@@ -267,4 +324,11 @@ body {
     #pokedexList{
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     }
+    .buttonRow {
+        flex-direction: row;  
+        justify-content: center;
+    }
+    .buttonRow button {
+    width: auto;      
+  }
 }
