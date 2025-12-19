@@ -178,7 +178,6 @@ async function showPokemonPopup() {
   currentPokemon = {
     id: pokemon.id,
     name: pokemon.name,
-    type: pokemon.type,
     sprite: spriteUrl,
     shiny: shiny,
     types: types
@@ -189,7 +188,7 @@ async function showPokemonPopup() {
 const shiny_odds = 4096; //want to lower this near end for more chances
 
 //for testing the shiny rolls - set to null when not testing
-const shiny_test_odds = 1; 
+const shiny_test_odds = null; 
 
 function rollShiny() {
   const odds = shiny_test_odds ?? shiny_odds;
@@ -250,13 +249,6 @@ document.getElementById("releaseButton").addEventListener("click", () => {
   currentPokemon = null;
   startBreakTimer();
 });
-
-function getPokedex() {
-  return JSON.parse(localStorage.getItem("pokedex") || "[]");
-}
-function setPokedex(arr) {
-  localStorage.setItem("pokedex", JSON.stringify(arr));
-}
 
 //MESSAGES INSTEAD OF ALERT
 function showMessage(msg, color = "rgba(255, 99, 132, 0.7)") {

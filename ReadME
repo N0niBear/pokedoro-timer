@@ -89,3 +89,23 @@ localStorage.setItem("pokedex", JSON.stringify(pokedex));
 localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
 
 Stores the items on the to do list and Pokémon to the Pokédex for future reference.
+
+
+Future Enhancements 
+- User settings for custom timer durations
+- Sound effects and animations
+- Dark mode toggle
+- Timers continue while navigating other pages
+- More readible fontface
+- Note page to take notes
+- Catch a Pokémon when a task is checked off the To Do List
+- Search navigation as well as multiple pages for Pokémon cards
+
+Known Issues & Limitations
+- To-do list input is only validated for empty values
+- Study and break timers use predefined durations and cannot currently be customized by the user
+- All user data is stored in the browser using `localStorage`
+- The application assumes a single user and does not support accounts, login functionality, or shared data across devices
+- Break timer does not start until catch or release of Pokémon
+- Pause/Resume button actively works no matter the state 
+
