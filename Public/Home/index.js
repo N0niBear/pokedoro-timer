@@ -25,6 +25,16 @@ function updateDateTime() {
 updateDateTime();
 setInterval(updateDateTime, 1000);
 
+//NAVBAR
+function myFunction() {
+  var x = document.getElementById("myNavBar");
+  if (x.className === "navBar") {
+    x.className += " responsive";
+  } else {
+    x.className = "navBar";
+  }
+}
+
 //POMODORO TIMER
 let studyCountdown;
 let studyTimeLeft = 60;

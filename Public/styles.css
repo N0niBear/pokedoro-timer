@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Pokemon Solid';
-    src: url('fonts/Pokemon\ Solid.ttf');
+    src: url('/fonts/PokemonSolidNormal-xyWR.ttf') format('truetype');
 }
 body {
     font-family:'Courier New', Courier, monospace;
@@ -38,8 +38,7 @@ body {
 .navBar {
     display: flex;
     justify-content: center;
-}
-.navBar ul {
+    overflow: hidden;
     list-style-type: none;
     display: flex;
     flex-wrap: wrap;
@@ -50,33 +49,38 @@ body {
     width: fit-content;
     overflow: auto;
 }
-.navBar ul li a {
+.navBar a {
+    float: left;
     display: block;
     color: #EAEBED;
+    text-align: center;
     padding: 12px;
     text-decoration: none;
 }
-.navBar ul li a:hover {
+.navBar a:hover {
     color: #0D0C1D;
     background-color: #F3CDE2;
 }
-.navBar ul li a.active {
+.navBar a.active {
     color: #0D0C1D;
     background-color: #D7E6FF;
     border-right: 2px solid #FFF4C2
 }
-.homeLayout{
+.navBar .icon {
+    display: none;
+}
+.homeLayout {
     display: flex;
     flex-direction: column;
     gap: 16px;
     padding: 16px;
-    align-items: stretch;
+    align-items: center;
 }
 
 /* Date & Timers */
 .dateCard {
     width: 100%;
-    max-width: 420px;
+    max-width: 75%;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -93,7 +97,7 @@ body {
 }
 .timerCard {
     width: 100%;
-    max-width: 420px;
+    max-width: 75%;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -318,7 +322,6 @@ body {
 
 /*MEDIA QUERY*/
 @media (min-width: 700px) {
-
     #titleWord { 
         font-size: 4rem; 
         -webkit-text-stroke-width: 4px; 
@@ -326,11 +329,12 @@ body {
     #titleWord2 { 
         font-size: 2rem; 
     }
-    .homeLayout {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: flex-start;
+    .homeLayout{
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    padding: 16px;
+    align-items: center;
     }
     .dateCard {
         width: 300px;
@@ -340,7 +344,6 @@ body {
         width: 200px;
         max-width: none;
     }
-
     .navBar ul{
         flex-wrap: nowrap;
         justify-content: flex-start;
